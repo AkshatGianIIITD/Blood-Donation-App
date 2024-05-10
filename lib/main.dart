@@ -1,4 +1,6 @@
+import 'package:blood_donation_app/achievements_page.dart';
 import 'package:blood_donation_app/blood_request_page_view_widget.dart';
+import 'package:blood_donation_app/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -82,6 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
 // Flag to track whether to allow scrolling
   bool _allowScrolling = true;
+  var selectedIndex=0;
+  var achievementsOpen=false;
 
   //late Location location=Location();
   //late LatLng _currentLocation;
@@ -116,10 +120,25 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   ScrollPhysics _scrollPhysics = ScrollPhysics();
+  Icon achievementsIcon=Icon(Icons.emoji_events_outlined);
 
   @override
   Widget build(BuildContext context) {
-    bool _isInteracting = false;
+    Widget page;
+    switch(selectedIndex){
+      case 0:
+        page=HomePage();
+        break;
+      case -1:
+        page=AchievementsPage();
+      default:
+        page=HomePage();  
+        break;
+    }
+    // if(achievementsOpen){
+    //   page=AchievementsPage();
+    // }
+    //bool _isInteracting = false;
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -144,8 +163,23 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.emoji_events_outlined),
+            onPressed: () {
+              setState(() {
+                if(!achievementsOpen){
+                  page=AchievementsPage();
+                achievementsIcon=Icon(Icons.emoji_events);
+                achievementsOpen=!achievementsOpen;
+                selectedIndex=-1;
+                }
+                else{
+                  page=HomePage();
+                  achievementsIcon=Icon(Icons.emoji_events_outlined);
+                  achievementsOpen=!achievementsOpen;
+                  selectedIndex=0;
+                }
+              });
+            },
+            icon: achievementsIcon,
             color: Theme.of(context).colorScheme.onPrimary,
           ),
           IconButton(
@@ -170,106 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
         unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
       ),
       resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: ListView(
-          //crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: const EdgeInsets.only(left: 24, top: 10),
-              child: Row(
-                children: [
-                  Text(
-                    "Donate Blood",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(
-                left: 25,
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    "Near you",
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Color.fromARGB(255, 134, 134, 134)),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: 200,
-              child: ListView.builder(
-                  padding: const EdgeInsets.all(10),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 7,
-                  itemBuilder: ((context, index) {
-                    return const BloodDonationCenterListViewWidget(
-                        centerName: "Center-1",
-                        address: "State, city ,street",
-                        bloodTypes: ["A", "B", "A+"],
-                        patientName: "Raghav Shukla");
-                  })),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(22),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                // ignore: sized_box_for_whitespace
-                child: Container(
-                  height: 200,
-                  //decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
-
-                  child: GoogleMap(
-                    onMapCreated: _onMapCreated,
-                    initialCameraPosition: CameraPosition(
-                      target: _home,
-                      zoom: 11.0,
-                    ),
-                    gestureRecognizers: Set()
-                      ..add(Factory<PanGestureRecognizer>(
-                          () => PanGestureRecognizer()))
-                      ..add(Factory<ScaleGestureRecognizer>(
-                          () => ScaleGestureRecognizer())),
-
-                    //myLocationEnabled: true,
-                  ),
-                ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 23,bottom: 15),
-              child: Text(
-                "Blood Requests",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Container(
-              height: 225,
-              child: Stack(children: [
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    height: 225,
-                    child: PageView.builder(
-                        controller: PageController(viewportFraction: 0.89),
-                        itemCount: 5,
-                        itemBuilder: (_, i) {
-                          return BloodRequestPageViewWidget(bloodType: "B+",patientName: "Kuljit Kumar Walia",unitsOfBlood: 1 ,Address: "State-1, city-1, state-1",day:  "Thrusday", month: "Apr",date:  18);
-                        }),
-                  ),
-                ),
-              ]),
-            ),
-          ],
-        ),
-      ),
+      body: page,
     );
   }
 }
