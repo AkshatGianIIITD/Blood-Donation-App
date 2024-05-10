@@ -42,10 +42,24 @@ class BloodDonationCenterListViewWidget extends StatelessWidget {
         const SizedBox(
           height: 4,
         ),
-        Text(
-          'Blood Type:${bloodTypes.join(", ")}',
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: textColor.withOpacity(0.9)),
+        Row(
+          children: [
+            Text(
+              'Blood Type:',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: textColor.withOpacity(0.9)),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              '${bloodTypes.join(", ")}',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: textColor.withOpacity(0.9),
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
         const SizedBox(
           height: 4,

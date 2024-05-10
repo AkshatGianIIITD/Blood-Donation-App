@@ -242,26 +242,26 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 23),
+              padding: EdgeInsets.only(left: 23,bottom: 15),
               child: Text(
                 "Blood Requests",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),
             Container(
-              height: 180,
+              height: 200,
               child: Stack(children: [
                 Positioned(
                   top: 0,
                   left: -20,
                   right: 0,
                   child: Container(
-                    height: 180,
+                    height: 200,
                     child: PageView.builder(
                         controller: PageController(viewportFraction: 0.8),
                         itemCount: 5,
                         itemBuilder: (_, i) {
-                          return BloodRequestPageViewWidget();
+                          return BloodRequestPageViewWidget(bloodType: "B+",patientName: "Kuljit Kumar Walia",unitsOfBlood: 1 ,Address: "State-1, city-1, state-1",day:  "Thrusday", month: "Apr",date:  18);
                         }),
                   ),
                 ),
