@@ -249,16 +249,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Container(
-              height: 200,
+              height: 225,
               child: Stack(children: [
                 Positioned(
                   top: 0,
-                  left: -20,
+                  left: 0,
                   right: 0,
                   child: Container(
-                    height: 200,
+                    height: 225,
                     child: PageView.builder(
-                        controller: PageController(viewportFraction: 0.8),
+                        controller: PageController(viewportFraction: 0.89),
                         itemCount: 5,
                         itemBuilder: (_, i) {
                           return BloodRequestPageViewWidget(bloodType: "B+",patientName: "Kuljit Kumar Walia",unitsOfBlood: 1 ,Address: "State-1, city-1, state-1",day:  "Thrusday", month: "Apr",date:  18);
