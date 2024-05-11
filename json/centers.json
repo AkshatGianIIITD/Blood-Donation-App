@@ -1,0 +1,52 @@
+[
+    {
+        "centerName":"Holy Family Hospital Blood Bank",
+        "address":"Okhla, New Delhi, Delhi 110025",
+        "bloodTypes":["A+","A-","B+"],
+        "patientName": "Raghav Shukla",
+        "markerId":"Holy Family Hospital Blood Bank",
+        "title": "Holy Family Hospital Blood Bank",
+        "lat": 28.561652,
+        "lng": 77.274947
+    },
+    {
+        "centerName":"Apollo Hospital Blood Bank",
+        "address":"Indraprastha Medical Corporation, Pocket C, Sarita Vihar, New Delhi, Delhi 110044",
+        "bloodTypes":["AB-","O+","B-","A+"],
+        "patientName": "Ashok Jaiswal",
+        "markerId":"Apollo Hospital Blood Bank",
+        "title": "Apollo Hospital Blood Bank",
+        "lat": 28.530780,
+        "lng": 77.294002
+    },
+    {
+        "centerName":"National Heart Institute Blood Bank",
+        "address":"Community Center, National Heart Institute, 49, 50, D Block, East of Kailash, New Delhi, Delhi 110065",
+        "bloodTypes":["O-","AB+","A+","B-","A-"],
+        "patientName": "Shorvi",
+        "markerId":"National Heart Institute Blood Bank",
+        "title": "National Heart Institute Blood Bank",
+        "lat": 28.557453,
+        "lng": 77.245679
+    },
+    {
+        "centerName":"Hakeem Abdul Hameed Centenary Hospital Blood Bank",
+        "address":"Guru Ravidas Marg, Kalkaji Extension, Block A 8, Block D, Hamdard Nagar, New Delhi, Delhi 110062",
+        "bloodTypes":["AB-","O+","A-","B+","AB+"],
+        "patientName": "Ruksana",
+        "markerId":"Hakeem Abdul Hameed Centenary Hospital Blood Bank",
+        "title": "Hakeem Abdul Hameed Centenary Hospital Blood Bank",
+        "lat": 28.527855,
+        "lng": 77.257571
+    },
+    {
+        "centerName":"Fortis Escort Heart Institute Blood Bank",
+        "address":"New Friends Colony, New Delhi, Delhi 110025",
+        "bloodTypes":["AB-","O+","A-","B+","AB+"],
+        "patientName": "Ritik",
+        "markerId":"Fortis Escort Heart Institute Blood Bank",
+        "title": "Fortis Escort Heart Institute Blood Bank",
+        "lat": 28.560672,
+        "lng": 77.273904
+    }
+]

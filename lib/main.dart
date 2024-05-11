@@ -1,6 +1,9 @@
 import 'package:blood_donation_app/achievements_page.dart';
 import 'package:blood_donation_app/blood_request_page_view_widget.dart';
+import 'package:blood_donation_app/connect_page.dart';
+import 'package:blood_donation_app/donate_page.dart';
 import 'package:blood_donation_app/home_page.dart';
+import 'package:blood_donation_app/request_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -78,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final LatLng _center = const LatLng(-33.86, 151.20);
   final LatLng _home = const LatLng(28.69, 77.29);
+  final LatLng _college = const LatLng(28.543, 77.271);
 
   int _selectedBottomBarIndex = 0;
   final ScrollController _scrollController = ScrollController();
@@ -124,17 +128,28 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget page;
-    switch(selectedIndex){
+    Widget page=HomePage();
+    if(selectedIndex==-1){
+      page=AchievementsPage();
+    }
+    else{switch(_selectedBottomBarIndex){
       case 0:
         page=HomePage();
         break;
-      case -1:
-        page=AchievementsPage();
-      default:
-        page=HomePage();  
+      case 1:
+      //_selectedBottomBarIndex=-1;
+        page=DonatePage();
         break;
-    }
+      case 2:
+        page=RequestPage();
+        break;
+      case 3:
+        page=ConnectPage();
+        break;    
+      default:
+        //page=HomePage();  
+        break;
+    }}
     // if(achievementsOpen){
     //   page=AchievementsPage();
     // }

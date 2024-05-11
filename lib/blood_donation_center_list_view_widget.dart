@@ -1,19 +1,32 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 class BloodDonationCenterListViewWidget extends StatelessWidget {
   const BloodDonationCenterListViewWidget(
       {super.key,
       required this.centerName,
       required this.address,
       required this.bloodTypes,
-      required this.patientName});
+      required this.patientName, required this.markerId, required this.title, this.lat, this.lng, required this.completer});
   final String centerName;
   final String address;
   final List<String> bloodTypes;
   final String patientName;
+  final Completer<GoogleMapController> completer;
+  final String markerId;
+  final String title;
+  final lat;
+  final lng;
+  Future<void> _goToMarker() async{
+    final GoogleMapController controller=await completer.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat,lng),zoom: 17)));
+  }
 
   @override
   Widget build(BuildContext context) {
+    var bloodTypesJoined=bloodTypes.join(', ');
     var textColor = Theme.of(context).colorScheme.onPrimary;
     return Container(
       margin: EdgeInsets.only(left: 10),
@@ -43,6 +56,7 @@ class BloodDonationCenterListViewWidget extends StatelessWidget {
           height: 4,
         ),
         Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               'Blood Type:',
@@ -52,12 +66,14 @@ class BloodDonationCenterListViewWidget extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
-            Text(
-              '${bloodTypes.join(", ")}',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  color: textColor.withOpacity(0.9),
-                  fontWeight: FontWeight.bold),
+            Expanded(
+              child: Text(
+                '${bloodTypesJoined}',
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    color: textColor.withOpacity(0.9),
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ),
@@ -83,7 +99,9 @@ class BloodDonationCenterListViewWidget extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(1), minimumSize: Size(55, 25)),
-              onPressed: () {},
+              onPressed: () {
+                _goToMarker();
+              },
               child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
